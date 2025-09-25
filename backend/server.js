@@ -8,7 +8,7 @@ const fs=require("fs").promises;
 const path =require("path");
 
 // DEFINE A PORTA QUE O SERVIDOR IRÁ RODAR
-const Port = 3001
+const Port = 5001
 
 // INSTANCIANDO O EXPRESS
 const app = express();
@@ -21,7 +21,7 @@ app.use(cors());
 
 // CRIANDO O CAMINHO PARA LER O ARQUIVO DADOS.JSON
 
-const caminho =  path.join(__dirname, "data","dados.json")
+const caminho =  path.join(__dirname, "data/dados.json")
 
 // CRIANDO A ROTA (post)
 app.post("/clientes", async(req,res)=>{
@@ -56,6 +56,18 @@ app.post("/clientes", async(req,res)=>{
 
 })
 
+// ROTA (get) QUE BUSCA TODOS OS CLIENTES CADASTRADOS
+app.get("/clientes", async(req,res)=>{
+    try{
+        const data = await fs.readFile(caminho,"utf-8")
+        const clientes = JSON.parse(data);
+        res.status(200).json(clientes);
+    }
+    catch(error){
+        console.log("Erro ao ler o arquivo",error);
+        res.status(500).json({mensagem:"Erro ao buscar os dados"})
+    }
+})
     
 
 // ESCUTANDO O SERVIDOR NA PORTA

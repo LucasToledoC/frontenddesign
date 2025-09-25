@@ -1,11 +1,6 @@
 [
   {
     "nome": "Fiap",
-    "Tipo": "Tecnologia"
-  },
-  null,
-  {
-    "name": "teste1",
-    "tipo": "tec"
+    "email": "Tecnologia"
   }
 ]
